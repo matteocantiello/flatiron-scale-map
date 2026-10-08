@@ -1,0 +1,66 @@
+# Reference landmarks
+# ===================
+#
+# Familiar objects and timescales printed along the top (length) and right
+# (time) edges of the figure, so the logarithmic axes can be read at a glance.
+#
+#   value  in SI units (meters or seconds); the code takes log10
+#   label  text as printed; "\n" forces a line break
+#
+# Values are order-of-magnitude anchors, not precise measurements.
+
+[[length]]
+label = "atom"
+value = 1e-10          # Bohr-radius scale, ~1 Å
+
+[[length]]
+label = "virus"
+value = 1e-7           # ~100 nm
+
+[[length]]
+label = "cell"
+value = 1e-5           # ~10 µm
+
+[[length]]
+label = "human"
+value = 1.0
+
+[[length]]
+label = "Earth"
+value = 1e7            # diameter 1.27e7 m
+
+[[length]]
+label = "Solar System"
+value = 1e13           # ~70 au
+
+[[length]]
+label = "Milky Way"
+value = 1e21           # ~30 kpc
+
+[[length]]
+label = "observable\nUniverse"
+value = 4.0e26         # comoving radius ~4.4e26 m
+
+[[time]]
+label = "attosecond"
+value = 1e-18
+
+[[time]]
+label = "molecular\nvibration"
+value = 1e-14          # ~10 fs
+
+[[time]]
+label = "neural spike"
+value = 1e-3           # ~1 ms
+
+[[time]]
+label = "one day"
+value = 86400.0
+
+[[time]]
+label = "human\nlifetime"
+value = 2.525e9        # 80 yr × 3.156e7 s/yr
+
+[[time]]
+label = "age of the\nUniverse"
+value = 4.355e17       # 13.8 Gyr × 3.156e7 s/yr

@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this figure or its data, please cite it as below."
+title: "Flatiron scale map: characteristic length and time scales of the Flatiron Institute centers"
+version: 1.0.0
+date-released: 2026-10-08
+license: MIT
+authors:
+  - family-names: Cantiello
+    given-names: Matteo
+    affiliation: "Center for Computational Astrophysics, Flatiron Institute"
+keywords:
+  - Flatiron Institute
+  - scale map
+  - data visualization
+  - characteristic scales

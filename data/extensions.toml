@@ -1,0 +1,35 @@
+# Edge cases outside the core ranges
+# ==================================
+#
+# Systems some groups do study that fall outside a center's core box.
+# They were drawn as dashed outlines in early drafts and are left out of the
+# published figure. Render them with:
+#
+#     python -m scalemap slide --with-extensions
+#
+# Same conventions as centers.toml: log10 meters and log10 seconds, a box that
+# the code clips to t >= L/c, and `center` naming whose hue to use.
+
+[[extension]]
+center = "CCQ"
+label  = "cavity-coupled materials"
+length = [-7.5, -6.0]
+time   = [-14.5, -11.0]
+note   = "Light-matter coupling in optical cavities (Dynamics and Control) reaches ~1 µm."
+
+[[extension]]
+center = "CCN"
+label  = "behavior and natural scenes"
+length = [-1.0, 1.0]
+time   = [-1.0, 9.0]
+note   = "Perception and behavior work uses natural scenes up to ~10 m."
+
+[[extension]]
+center = "CCA"
+label  = "kinetic plasma scales"
+length = [-3.0, 4.0]
+time   = [-9.0, -3.0]
+note   = "Plasma skin depths and gyro-radii (mm to km) resolved in kinetic simulations."
+
+# Not a box: primordial black hole horizons inside stars ("Hawking stars")
+# reach 1e-13 to 1e-7 m. Mentioned in docs/methodology.md, not drawn.

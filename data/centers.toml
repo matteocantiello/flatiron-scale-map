@@ -1,0 +1,121 @@
+# Core scale ranges of the Flatiron Institute centers
+# ===================================================
+#
+# One [[center]] table per center, listed from the smallest to the largest
+# systems studied. The figure legend uses this order.
+#
+# Geometry
+#   length = [min, max]   log10 of characteristic length in meters
+#   time   = [min, max]   log10 of characteristic time in seconds
+#
+#   A center's region in the figure is this box clipped to the causal
+#   half-plane t >= L/c, i.e. log10 t >= log10 L - log10 c (log10 c = 8.4768).
+#   The clipping is done in code (scalemap/data.py), so only the box
+#   lives here. See docs/methodology.md for why.
+#
+#   A center with kind = "methods" has no box. It is drawn as a band across
+#   the full length axis (CCM builds tools used at every scale).
+#
+# Style
+#   color        wash and outline hue
+#   label_color  darker shade of the same hue, used for text
+#   wash_alpha   fill opacity, tuned per hue so every wash lands at about the
+#                same lightness on white (dark hues get a lower alpha)
+#
+# Provenance
+#   smallest / largest / fastest / slowest describe what sets each bound.
+#   They are judgment calls about each center's *core* research program,
+#   made from the centers' public pages (url) in October 2026. They are not
+#   official numbers. Edge cases that were considered and left out of the
+#   core ranges are listed in extensions.toml.
+
+[[center]]
+id          = "CCQ"
+name        = "Center for Computational Quantum Physics"
+short_name  = "Quantum Physics"
+kind        = "region"
+length      = [-10.5, -7.5]
+time        = [-18.0, -11.0]
+color       = "#A86BDB"
+label_color = "#6B3A9E"
+wash_alpha  = 0.17
+smallest    = "electron orbitals and crystal unit cells (~0.3 Å)"
+largest     = "moiré superlattices (~30 nm)"
+fastest     = "attosecond electron dynamics"
+slowest     = "picosecond relaxation (plus equilibrium properties)"
+url         = "https://www.simonsfoundation.org/flatiron/center-for-computational-quantum-physics/"
+
+[[center]]
+id          = "ICC"
+name        = "Initiative for Computational Catalysis"
+short_name  = "Catalysis"
+kind        = "region"
+length      = [-10.0, -7.0]
+time        = [-15.0, 4.0]
+color       = "#1F4FA3"
+label_color = "#163C7E"
+wash_alpha  = 0.12
+smallest    = "chemical bonds and active sites (~1 Å)"
+largest     = "nanoparticles, zeolite pores, electrode–electrolyte interfaces (~100 nm)"
+fastest     = "femtosecond bond vibrations and electron transfer"
+slowest     = "catalytic turnover and deactivation (seconds to hours)"
+url         = "https://www.simonsfoundation.org/flatiron/initiative-for-computational-catalysis/"
+
+[[center]]
+id          = "CCB"
+name        = "Center for Computational Biology"
+short_name  = "Biology"
+kind        = "region"
+length      = [-10.0, 0.0]
+time        = [-12.0, 6.0]
+color       = "#6BAF2E"
+label_color = "#3E6D12"
+wash_alpha  = 0.18
+smallest    = "atoms in cryo-EM maps and designed proteins (~1 Å)"
+largest     = "vascular and lymphatic transport networks (~1 m)"
+fastest     = "picosecond protein motions"
+slowest     = "embryonic development (days)"
+url         = "https://www.simonsfoundation.org/flatiron/center-for-computational-biology/"
+
+[[center]]
+id          = "CCN"
+name        = "Center for Computational Neuroscience"
+short_name  = "Neuroscience"
+kind        = "region"
+length      = [-6.0, -1.0]
+time        = [-3.0, 9.0]
+color       = "#14A3AE"
+label_color = "#0A6770"
+wash_alpha  = 0.17
+smallest    = "synapses and dendritic spines (~1 µm)"
+largest     = "the whole brain (~10 cm)"
+fastest     = "millisecond spikes"
+slowest     = "learning, development and aging (years to decades)"
+url         = "https://www.simonsfoundation.org/flatiron/center-for-computational-neuroscience/"
+
+[[center]]
+id          = "CCA"
+name        = "Center for Computational Astrophysics"
+short_name  = "Astrophysics"
+kind        = "region"
+length      = [4.0, 26.6]
+time        = [-3.0, 17.6]
+color       = "#B8202E"
+label_color = "#8E1621"
+wash_alpha  = 0.13
+smallest    = "neutron stars and stellar-mass black-hole horizons (~10 km)"
+largest     = "the observable Universe (~4 × 10^26 m)"
+fastest     = "millisecond neutron-star spin and compact-object mergers"
+slowest     = "the Hubble time (~13.8 Gyr)"
+url         = "https://www.simonsfoundation.org/flatiron/center-for-computational-astrophysics/"
+
+[[center]]
+id          = "CCM"
+name        = "Center for Computational Mathematics"
+short_name  = "Mathematics"
+kind        = "methods"
+color       = "#E8862A"
+label_color = "#97520F"
+wash_alpha  = 0.24
+note        = "Builds mathematical methods, algorithms and software used by every other center, from cryo-EM (Å) to cosmological surveys. Drawn as a band, not a region."
+url         = "https://www.simonsfoundation.org/flatiron/center-for-computational-mathematics/"
