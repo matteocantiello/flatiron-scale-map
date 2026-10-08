@@ -13,8 +13,9 @@
 #   The clipping is done in code (scalemap/data.py), so only the box
 #   lives here. See docs/methodology.md for why.
 #
-#   A center with kind = "methods" has no box. It is drawn as a band across
-#   the full length axis (CCM builds tools used at every scale).
+#   A center with kind = "methods" has no box. It is drawn as an L-shaped band
+#   along both axes, every length and every time (CCM builds tools used at
+#   every scale).
 #
 # Style
 #   color        wash and outline hue
@@ -117,5 +118,5 @@ kind        = "methods"
 color       = "#E8862A"
 label_color = "#97520F"
 wash_alpha  = 0.24
-note        = "Builds mathematical methods, algorithms and software used by every other center, from cryo-EM (Å) to cosmological surveys. Drawn as a band, not a region."
+note        = "Builds mathematical methods, algorithms and software used by every other center, from cryo-EM (Å) to cosmological surveys. Drawn as a band along both axes, not a region."
 url         = "https://www.simonsfoundation.org/flatiron/center-for-computational-mathematics/"

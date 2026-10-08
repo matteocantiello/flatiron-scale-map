@@ -85,7 +85,7 @@ a box in log₁₀(L / m) × log₁₀(t / s).
 | **CCB**, Biology | 1 Å – 1 m | 1 ps – 12 d | atoms in cryo-EM and designed proteins → vascular networks; protein motion → embryonic development |
 | **CCN**, Neuroscience | 1 µm – 10 cm | 1 ms – 30 yr | synapses → whole brain; spikes → learning, development and aging |
 | **CCA**, Astrophysics | 10 km – 4×10²⁶ m | 1 ms – 13 Gyr | neutron stars → observable Universe; ms spin and mergers → Hubble time |
-| **CCM**, Mathematics | all scales | – | builds methods used by every center, so it is drawn as a band, not a region |
+| **CCM**, Mathematics | all scales | all scales | builds methods used by every center, so it is drawn as an L-shaped band along both axes, not a region |
 
 The bounds are judgment calls about each center's *core* program, made from the centers' public
 pages. They are not official Flatiron numbers. [`docs/methodology.md`](docs/methodology.md) gives

@@ -59,7 +59,7 @@ families rather than lightness alone.
 
 1. major gridlines
 2. excluded field (covers the grid below the line)
-3. CCM band and its caption
+3. CCM band, an L along the bottom and left axes, and its caption
 4. region washes, **largest area first** (CCA, CCB, CCN, ICC, CCQ); computed, not hard-coded
 5. region outlines, all drawn after all washes, so every edge stays crisp through overlaps
 6. the t = L/c line, region labels, title block, legend

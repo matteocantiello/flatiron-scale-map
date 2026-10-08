@@ -72,9 +72,10 @@ Bounds are log₁₀ m and log₁₀ s, as in `data/centers.toml`.
 ### CCM: Center for Computational Mathematics
 CCM creates mathematical methods, algorithms and software used by the other centers: fast
 transforms and solvers, statistical inference, signal and image processing. Its tools run from
-cryo-EM (ångströms) to cosmological surveys. It has no system scale of its own, so it is drawn as a
-band across the full length axis rather than as a region. A 37-decade box would dominate the figure
-and imply it studies systems at every scale, when it builds tools used at every scale.
+cryo-EM (ångströms) to cosmological surveys. It has no system scale of its own, so it is drawn as
+an L-shaped band along both axes, every length and every time, rather than as a region. A
+37-decade box would dominate the figure and imply it studies systems at every scale, when it
+builds tools used at every scale.
 
 ## Edge cases left out
 

@@ -12,6 +12,7 @@ import pytest
 
 from scalemap.data import (LOG10_C, box_polygon, clip_to_causal, load_centers,
                            load_extensions, load_landmarks, polygon_area)
+from scalemap.plot import XMAX, XMIN, YMAX, YMIN
 
 REFERENCE = {
     "CCQ": [(-10.5, -18), (-9.52, -18), (-7.5, -15.98), (-7.5, -11), (-10.5, -11)],
@@ -91,7 +92,7 @@ def test_one_methods_center(centers):
 
 def test_landmarks_sorted_and_in_window():
     lm = load_landmarks()
-    for axis, (lo, hi) in {"length": (-14, 28), "time": (-20, 19)}.items():
+    for axis, (lo, hi) in {"length": (XMIN, XMAX), "time": (YMIN, YMAX)}.items():
         vals = [m.log10 for m in lm[axis]]
         assert vals == sorted(vals), axis
         assert all(lo <= v <= hi for v in vals), axis

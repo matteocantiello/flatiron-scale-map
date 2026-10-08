@@ -9,7 +9,7 @@ Drawing order, back to front:
 
 1. major gridlines (allowed half only, covered elsewhere by the field)
 2. the excluded field below t = L/c, a flat warm gray
-3. the CCM methods band along the bottom
+3. the CCM methods band: an L along the bottom and left axes
 4. region washes, largest area first
 5. region outlines, all after all washes, so every edge stays crisp
 6. the t = L/c line, labels and the legend
@@ -32,9 +32,14 @@ from . import fonts
 from .data import LOG10_C, Center, load_centers, load_extensions, load_landmarks
 from .layouts import LAYOUTS
 
-# Plot window in log10 units.
-XMIN, XMAX, YMIN, YMAX = -14, 28, -20, 19
-BAND_TOP = -19.0  # top of the CCM methods band
+# Plot window in log10 units. The left margin holds the CCM band's left arm
+# and the CCQ label, which sits outside its (small) region.
+XMIN, XMAX, YMIN, YMAX = -15, 28, -20, 19
+# The CCM methods band is an L along the two data axes. Its bottom arm is BAND
+# decades of time tall; its left arm gets the same thickness on the page
+# (see _band_right), so the two arms match at any aspect ratio.
+BAND = 1.0
+BAND_TOP = YMIN + BAND  # top of the bottom arm
 
 # Neutral palette. Center hues come from data/centers.toml.
 BG = "#FFFFFF"       # page
@@ -113,10 +118,13 @@ def _draw(cfg, centers, landmarks, extensions):
     ax.add_patch(Polygon([(YMIN + LOG10_C, YMIN), (XMAX, YMIN), (XMAX, YMAX), (YMAX + LOG10_C, YMAX)],
                          closed=True, facecolor=FIELD, edgecolor="none", zorder=0.8))
 
-    for m in methods:  # one methods band (CCM)
-        ax.axhspan(YMIN, BAND_TOP, color=m.color, alpha=m.wash_alpha, lw=0, zorder=1)
-        ax.plot([XMIN, XMAX], [BAND_TOP] * 2, color=m.color, lw=lw * 0.9, zorder=1.5,
-                solid_capstyle="butt")
+    band_right = _band_right(ax)
+    for m in methods:  # one methods band (CCM): an L along the bottom and left axes
+        ax.add_patch(Polygon([(XMIN, YMIN), (XMAX, YMIN), (XMAX, BAND_TOP), (band_right, BAND_TOP),
+                              (band_right, YMAX), (XMIN, YMAX)], closed=True,
+                             facecolor=m.color, alpha=m.wash_alpha, lw=0, zorder=1))
+        ax.plot([band_right, band_right, XMAX], [YMAX, BAND_TOP, BAND_TOP], color=m.color,
+                lw=lw * 0.9, zorder=1.5, solid_capstyle="butt", solid_joinstyle="miter")
         yb = ax.transData.transform((0, BAND_TOP))[1] + fs["ccm"] * 0.45 * fig.dpi / 72
         ax.text(cfg["ccm_x"], ax.transData.inverted().transform((0, yb))[1], CCM_CAPTION,
                 ha="left", va="baseline", fontsize=fs["ccm"], color=m.label_color, zorder=6)
@@ -137,10 +145,18 @@ def _draw(cfg, centers, landmarks, extensions):
     _region_labels(ax, cfg, by_id, fs, lw)
     _title_block(fig, ax, cfg, fs)
     diag = _legend(fig, ax, cfg, centers)
+    diag["band_right"] = band_right
     return fig, diag
 
 
 # --------------------------------------------------------------------------- pieces
+
+
+def _band_right(ax) -> float:
+    """Right edge (log10 m) of the band's left arm: as thick on the page as the bottom arm."""
+    to_px, to_data = ax.transData.transform, ax.transData.inverted().transform
+    thickness = to_px((XMIN, BAND_TOP))[1] - to_px((XMIN, YMIN))[1]  # pixels
+    return float(to_data((to_px((XMIN, YMIN))[0] + thickness, YMIN))[0])
 
 
 def _axes(ax, fs, lw):
@@ -290,14 +306,17 @@ def _legend(fig, ax, cfg, centers) -> dict:
                                      transform=fig.transFigure, fc=to_rgba(c.color, c.wash_alpha),
                                      ec=c.color, lw=lw * 1.15, zorder=6))
             fig.text(x_acr / FW, base, acr, color=c.label_color, va="baseline", zorder=6, **acr_kw)
-        elif kind == "band":
-            bh = sw * 0.62
-            fig.add_artist(Rectangle((left / FW, (y - bh / 2) / FH), sw / FW, bh / FH,
-                                     transform=fig.transFigure, fc=to_rgba(c.color, c.wash_alpha),
-                                     ec="none", zorder=6))
-            fig.add_artist(Line2D([left / FW, (left + sw) / FW], [(y + bh / 2) / FH] * 2,
+        elif kind == "band":  # a small L, like the band itself
+            t = sw * 0.38
+            x0, x1, y0, y1 = left, left + sw, y - sw / 2, y + sw / 2
+            corners = [(x0, y0), (x1, y0), (x1, y0 + t), (x0 + t, y0 + t), (x0 + t, y1), (x0, y1)]
+            fig.add_artist(Polygon([(u / FW, v / FH) for u, v in corners], closed=True,
+                                   transform=fig.transFigure, fc=to_rgba(c.color, c.wash_alpha),
+                                   ec="none", zorder=6))
+            fig.add_artist(Line2D([(x0 + t) / FW, (x0 + t) / FW, x1 / FW],
+                                  [y1 / FH, (y0 + t) / FH, (y0 + t) / FH],
                                   transform=fig.transFigure, color=c.color, lw=lw * 0.9,
-                                  zorder=6, solid_capstyle="butt"))
+                                  zorder=6, solid_capstyle="butt", solid_joinstyle="miter"))
             fig.text(x_acr / FW, base, acr, color=c.label_color, va="baseline", zorder=6, **acr_kw)
         else:
             fig.add_artist(Line2D([left / FW, (left + sw) / FW], [y / FH] * 2,
